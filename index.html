@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta http-equiv="Content-Security-Policy"
     content="default-src 'none'; manifest-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self';">
-  <title>CookCompass – Healthy meal planner & Tracker</title>
+  <title>CookCompass – Healthy South Indian meal planner</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" href="icon.svg" type="image/svg+xml">
   <link rel="icon" href="icon-192.png" type="image/png">
@@ -26,7 +26,7 @@
 
   <header>
     <h1>CookCompass</h1>
-    <p class="tagline">Your daily healthy meal suggester & tracker ❤️</p>
+    <p class="tagline">Your daily healthy meal planner ❤️</p>
     <button class="btn-settings" aria-label="Preferences">⚙️</button>
     <button class="btn-info" aria-label="Help & FAQ">ℹ️</button>
   </header>
@@ -47,11 +47,14 @@
           <div class="empty-icon">🍽️</div>
           <div class="empty-title">What should I cook today?</div>
           <div class="empty-sub">Tap ☀️ Breakfast or 🌙 Dinner above to get a suggestion</div>
-          <div class="empty-badge">🌿 Currently featuring South Indian meals only</div>
         </div>
       </div>
       <div id="suggestion-nudge"></div>
       <div id="today-cooked"></div>
+      <div class="cuisine-notice">
+        <span class="cuisine-notice-icon">🌿</span>
+        Currently featuring <strong>South Indian meals</strong>. More cuisines coming soon!
+      </div>
     </div>
   </div>
 
