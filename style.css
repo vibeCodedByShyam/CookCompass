@@ -241,9 +241,6 @@ header .tagline {
 }
 
 .cuisine-notice {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   margin-top: 16px;
   padding: 10px 14px;
   background: var(--green-soft);
@@ -251,11 +248,7 @@ header .tagline {
   border-radius: 8px;
   font-size: 0.8rem;
   color: var(--text-light);
-}
-
-.cuisine-notice-icon {
-  font-size: 1rem;
-  flex-shrink: 0;
+  line-height: 1.5;
 }
 
 .category-badge {
