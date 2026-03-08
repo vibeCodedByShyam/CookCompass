@@ -669,7 +669,7 @@ function renderCard(entry) {
   if (!wrap) return;
 
   if (!state.selectedMeal) {
-    wrap.innerHTML = `<div class="meal-card empty"><div class="empty-icon">🍽️</div><div class="empty-title">What should I cook today?</div><div class="empty-sub">Tap ☀️ Breakfast or 🌙 Dinner above to get a suggestion</div><div class="empty-badge">🌿 Currently featuring South Indian meals only</div></div>`;
+    wrap.innerHTML = `<div class="meal-card empty"><div class="empty-icon">🍽️</div><div class="empty-title">What should I cook today?</div><div class="empty-sub">Tap ☀️ Breakfast or 🌙 Dinner above to get a suggestion</div></div>`;
     return;
   }
 
