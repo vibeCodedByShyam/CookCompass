@@ -1,7 +1,7 @@
 // ─── CONSTANTS ───────────────────────────────────────────────────────────────
 const STORAGE_KEY = "ruchi_data";
-const AVOID_DAYS  = 7;
-const MEAL_ICONS  = { Breakfast: "☀️", Dinner: "🌙" };
+const AVOID_DAYS = 7;
+const MEAL_ICONS = { Breakfast: "☀️", Dinner: "🌙" };
 
 // ─── SECURITY: HTML ESCAPE ────────────────────────────────────────────────────
 function esc(str) {
@@ -16,7 +16,7 @@ function esc(str) {
 // ─── STATE (in-memory, synced to localStorage) ────────────────────────────────
 let state = {
   selectedMeal: null,   // "Breakfast" | "Dinner" | null
-  activeTab:    "today",
+  activeTab: "today",
 };
 
 // ─── TAB NAVIGATION ───────────────────────────────────────────────────────────
@@ -32,7 +32,7 @@ function switchTab(tab) {
 // ─── STORAGE ─────────────────────────────────────────────────────────────────
 function isValidEntry(h) {
   return h && typeof h.dish === "string" && typeof h.side === "string" &&
-         typeof h.meal === "string" && typeof h.date === "string";
+    typeof h.meal === "string" && typeof h.date === "string";
 }
 
 function loadStore() {
@@ -45,7 +45,7 @@ function loadStore() {
       if (s.settings.genericSides === undefined) s.settings.genericSides = false;
       return s;
     }
-  } catch {}
+  } catch { }
   return { todayMenu: {}, history: [], settings: { nutrientBias: true, genericSides: false } };
 }
 
@@ -71,14 +71,14 @@ function recentlyCooked(history) {
 
 // ─── SIDE TYPE LABELS (for generic-sides display mode) ───────────────────────
 const SIDE_TYPE_LABELS = {
-  "Chutney":     "Chutney",
-  "Sambar":      "Sambar",
-  "Podi":        "Podi",
-  "SalnaCurry":  "Salna / Kuruma",
+  "Chutney": "Chutney",
+  "Sambar": "Sambar",
+  "Podi": "Podi",
+  "SalnaCurry": "Salna / Kuruma",
   "KeralaKurry": "Kerala Curry",
-  "EggCurry":    "Egg Curry",
-  "VadaCurry":   "Vada Curry",
-  "Papad":       "Papad / Pickle",
+  "EggCurry": "Egg Curry",
+  "VadaCurry": "Vada Curry",
+  "Papad": "Papad / Pickle",
 };
 
 function genericSideName(sideName) {
@@ -91,7 +91,7 @@ const ALL_NUTRIENTS = ["Protein", "Calcium", "Iron", "Fiber"];
 
 // ICMR weekly targets, scaled to breakfast + dinner only (~45% of daily intake)
 const WEEKLY_TARGETS = { Protein: 100, Calcium: 1500, Iron: 30, Fiber: 70 };
-const NUTRIENT_UNITS  = { Protein: "g",  Calcium: "mg",  Iron: "mg", Fiber: "g" };
+const NUTRIENT_UNITS = { Protein: "g", Calcium: "mg", Iron: "mg", Fiber: "g" };
 
 function getWeeklyAnalysis(history) {
   const cutoff = new Date();
@@ -103,10 +103,10 @@ function getWeeklyAnalysis(history) {
   weekHistory.forEach(h => {
     const dish = DISHES.find(d => d.name === h.dish);
     if (dish && dish.nutrition) {
-      totals.Protein += dish.nutrition.protein  || 0;
-      totals.Calcium += dish.nutrition.calcium  || 0;
-      totals.Iron    += dish.nutrition.iron     || 0;
-      totals.Fiber   += dish.nutrition.fiber    || 0;
+      totals.Protein += dish.nutrition.protein || 0;
+      totals.Calcium += dish.nutrition.calcium || 0;
+      totals.Iron += dish.nutrition.iron || 0;
+      totals.Fiber += dish.nutrition.fiber || 0;
     }
   });
 
@@ -142,19 +142,19 @@ function pickDish(meal, history, settings) {
   if (settings?.nutrientBias !== false) {
     const { deficient } = getWeeklyAnalysis(history);
     if (deficient.length > 0) {
-      const topN     = Math.max(1, Math.ceil(deficient.length / 2));
+      const topN = Math.max(1, Math.ceil(deficient.length / 2));
       const priority = deficient.slice(0, topN);
 
-      const coversAll   = filtered.filter(d => priority.every(n => d.nutrients.includes(n)));
+      const coversAll = filtered.filter(d => priority.every(n => d.nutrients.includes(n)));
       if (coversAll.length > 0) return pickRandom(coversAll);
 
       const coversWorst = filtered.filter(d => d.nutrients.includes(deficient[0]));
       if (coversWorst.length > 0) return pickRandom(coversWorst);
 
-      const coversAny   = filtered.filter(d => d.nutrients.some(n => priority.includes(n)));
+      const coversAny = filtered.filter(d => d.nutrients.some(n => priority.includes(n)));
       if (coversAny.length > 0) return pickRandom(coversAny);
 
-      const biased      = filtered.filter(d => d.nutrients.some(n => deficient.includes(n)));
+      const biased = filtered.filter(d => d.nutrients.some(n => deficient.includes(n)));
       if (biased.length > 0) return pickRandom(biased);
     }
   }
@@ -174,7 +174,7 @@ function pickSide(category, inheritedSide) {
   }
 
   const chosenType = pickRandom(validTypes);
-  const pool       = SIDES.filter(s => s.type === chosenType);
+  const pool = SIDES.filter(s => s.type === chosenType);
   return { name: pickRandom(pool).name, reused: false };
 }
 
@@ -191,14 +191,14 @@ function generateMeal(meal, store, isReshuffle = false) {
   const side = pickSide(dish.category, inheritedSide);
 
   return {
-    dish:      dish.name,
-    category:  dish.category,
-    weight:    dish.weight,
+    dish: dish.name,
+    category: dish.category,
+    weight: dish.weight,
     nutrients: dish.nutrients,
     nutrition: dish.nutrition,
-    side:      side.name,
-    sideSame:  side.reused,
-    cooked:    false,
+    side: side.name,
+    sideSame: side.reused,
+    cooked: false,
   };
 }
 
@@ -292,8 +292,8 @@ function closeInfo() {
 // ─── SETTINGS SHEET ──────────────────────────────────────────────────────────
 function openSettings() {
   const store = loadStore();
-  document.getElementById("toggle-genericSides").checked  = !!store.settings.genericSides;
-  document.getElementById("toggle-nutrientBias").checked  = store.settings.nutrientBias !== false;
+  document.getElementById("toggle-genericSides").checked = !!store.settings.genericSides;
+  document.getElementById("toggle-nutrientBias").checked = store.settings.nutrientBias !== false;
   document.getElementById("settings-overlay").classList.add("open");
   document.getElementById("settings-sheet").classList.add("open");
 }
@@ -374,14 +374,14 @@ function logSearchedDish(dishName, meal) {
 
   const side = pickSide(dish.category, null);
   store.todayMenu[today][meal] = {
-    dish:      dish.name,
-    category:  dish.category,
-    weight:    dish.weight,
+    dish: dish.name,
+    category: dish.category,
+    weight: dish.weight,
     nutrients: dish.nutrients,
     nutrition: dish.nutrition,
-    side:      side.name,
-    sideSame:  false,
-    cooked:    true,
+    side: side.name,
+    sideSame: false,
+    cooked: true,
   };
 
   store.history = store.history.filter(h => !(h.date === today && h.meal === meal));
@@ -397,11 +397,11 @@ function logSearchedDish(dishName, meal) {
 // ─── EXPORT / IMPORT ─────────────────────────────────────────────────────────
 function onExport() {
   const store = loadStore();
-  const blob  = new Blob([JSON.stringify(store, null, 2)], { type: "application/json" });
-  const url   = URL.createObjectURL(blob);
-  const a     = document.createElement("a");
-  a.href      = url;
-  a.download  = `ruchi-backup-${todayStr()}.json`;
+  const blob = new Blob([JSON.stringify(store, null, 2)], { type: "application/json" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `ruchi-backup-${todayStr()}.json`;
   document.body.appendChild(a);
   a.click();
   document.body.removeChild(a);
@@ -439,7 +439,7 @@ function showDataStatus(msg, isError = false) {
   const el = document.getElementById("data-status");
   if (!el) return;
   el.textContent = msg;
-  el.className   = "data-status" + (isError ? " data-status-error" : "");
+  el.className = "data-status" + (isError ? " data-status-error" : "");
   setTimeout(() => { el.textContent = ""; el.className = "data-status"; }, 3500);
 }
 
@@ -501,8 +501,8 @@ function renderTodayCooked(store) {
     <div class="today-cooked-section">
       <div class="today-cooked-title">Cooked today</div>
       ${cooked.map(c => {
-        const sd = settings.genericSides ? genericSideName(c.side) : c.side;
-        return `
+    const sd = settings.genericSides ? genericSideName(c.side) : c.side;
+    return `
           <div class="today-cooked-item">
             <span class="today-cooked-icon">${MEAL_ICONS[c.meal] || ""}</span>
             <div class="today-cooked-text">
@@ -510,7 +510,7 @@ function renderTodayCooked(store) {
               <span class="today-cooked-side">with ${esc(sd)}</span>
             </div>
           </div>`;
-      }).join("")}
+  }).join("")}
     </div>
   `;
 }
@@ -580,26 +580,26 @@ function selectPendingMeal(meal) {
 
 // ─── SERVING SIZES PER CATEGORY ──────────────────────────────────────────────
 const SERVING_SIZES = {
-  "Idli":        "2 pieces",
-  "Dosa":        "1 medium",
-  "Uttapam":     "1 piece",
-  "Pongal":      "1 bowl (~200g)",
-  "Upma":        "1 bowl (~200g)",
-  "Semiya":      "1 bowl (~200g)",
-  "Chapati":     "2 rotis",
-  "Puttu":       "1 serving (~150g)",
-  "Poori":       "2 pieces",
-  "Paniyaram":   "4–5 pieces",
+  "Idli": "2 pieces",
+  "Dosa": "1 medium",
+  "Uttapam": "1 piece",
+  "Pongal": "1 bowl (~200g)",
+  "Upma": "1 bowl (~200g)",
+  "Semiya": "1 bowl (~200g)",
+  "Chapati": "2 rotis",
+  "Puttu": "1 serving (~150g)",
+  "Poori": "2 pieces",
+  "Paniyaram": "4–5 pieces",
   "Kozhukattai": "3–4 pieces",
-  "Naan":        "1 piece",
-  "Rice":        "1 serving (~250g)",
-  "Noodles":     "1 serving (~200g)",
-  "Bread":       "1 serving",
-  "Other":       "1 serving",
+  "Naan": "1 piece",
+  "Rice": "1 serving (~250g)",
+  "Noodles": "1 serving (~200g)",
+  "Bread": "1 serving",
+  "Other": "1 serving",
 };
 
 // ─── ANALYSIS BANNER ─────────────────────────────────────────────────────────
-const NUTRIENT_ICONS  = { Protein: "🥚", Calcium: "🦴", Iron: "🌿", Fiber: "🌾" };
+const NUTRIENT_ICONS = { Protein: "🥚", Calcium: "🦴", Iron: "🌿", Fiber: "🌾" };
 const NUTRIENT_COLORS = { Protein: "#E74C3C", Calcium: "#3498DB", Iron: "#F39C12", Fiber: "#27AE60" };
 
 function renderSuggestionNudge(store) {
@@ -614,7 +614,7 @@ function renderSuggestionNudge(store) {
   if (settings.nutrientBias === false) {
     text = "Variety-based pick · nutrient-smart picks off";
   } else if (deficient.length > 0) {
-    const topN     = Math.max(1, Math.ceil(deficient.length / 2));
+    const topN = Math.max(1, Math.ceil(deficient.length / 2));
     const priority = deficient.slice(0, topN);
     text = `Picking for <strong>${esc(priority.join(" + "))}</strong> this week`;
   }
@@ -626,7 +626,7 @@ function renderAnalysisBanner(store) {
   const banner = document.getElementById("analysis-banner");
   if (!banner) return;
 
-  const history  = store.history;
+  const history = store.history;
   const settings = store.settings || {};
   const { totals, deficient, totalMeals } = getWeeklyAnalysis(history);
 
@@ -637,9 +637,9 @@ function renderAnalysisBanner(store) {
 
   const bars = ALL_NUTRIENTS.map(n => {
     const fillPct = Math.min((totals[n] / WEEKLY_TARGETS[n]) * 100, 100);
-    const color   = fillPct >= 66 ? "#27AE60"
-                  : fillPct >= 33 ? "#F9C74F"
-                  :                 "#E74C3C";
+    const color = fillPct >= 66 ? "#27AE60"
+      : fillPct >= 33 ? "#F9C74F"
+        : "#E74C3C";
     const fillStr = fillPct.toFixed(1);
     const val = totals[n] < 10 ? totals[n].toFixed(1) : Math.round(totals[n]);
     return `
@@ -669,7 +669,7 @@ function renderCard(entry) {
   if (!wrap) return;
 
   if (!state.selectedMeal) {
-    wrap.innerHTML = `<div class="meal-card empty"><div class="empty-icon">🍽️</div><div class="empty-title">What should I cook today?</div><div class="empty-sub">Tap ☀️ Breakfast or 🌙 Dinner above to get a suggestion</div></div>`;
+    wrap.innerHTML = `<div class="meal-card empty"><div class="empty-icon">🍽️</div><div class="empty-title">What should I cook today?</div><div class="empty-sub">Tap ☀️ Breakfast or 🌙 Dinner above to get a suggestion</div><div class="empty-badge">🌿 Currently featuring South Indian meals only</div></div>`;
     return;
   }
 
@@ -680,22 +680,22 @@ function renderCard(entry) {
 
   const cooked = entry.cooked;
 
-  const store         = loadStore();
-  const settings      = store.settings || {};
-  const sideDisplay   = settings.genericSides ? genericSideName(entry.side) : entry.side;
+  const store = loadStore();
+  const settings = store.settings || {};
+  const sideDisplay = settings.genericSides ? genericSideName(entry.side) : entry.side;
 
   // Verify the sides actually match right now — stored sideSame can go stale if breakfast is shuffled
   const breakfastSide = store.todayMenu[todayStr()]?.Breakfast?.side;
-  const isSameSide    = state.selectedMeal === "Dinner" && !!breakfastSide && breakfastSide === entry.side;
-  const sameSideHTML  = isSameSide
+  const isSameSide = state.selectedMeal === "Dinner" && !!breakfastSide && breakfastSide === entry.side;
+  const sameSideHTML = isSameSide
     ? `<div class="same-side-note">♻️ Same as breakfast — no extra cooking needed</div>`
     : "";
 
   // Standout nutrient tags (always visible)
   const tagsHTML = entry.nutrients && entry.nutrients.length > 0
     ? `<div class="nutrient-tags">${entry.nutrients.map(t =>
-        `<span class="nutrient-tag" style="border-color:${esc(NUTRIENT_COLORS[t] || "#888")};color:${esc(NUTRIENT_COLORS[t] || "#888")}">${NUTRIENT_ICONS[t] || ""} ${esc(t)}</span>`
-      ).join("")}</div>`
+      `<span class="nutrient-tag" style="border-color:${esc(NUTRIENT_COLORS[t] || "#888")};color:${esc(NUTRIENT_COLORS[t] || "#888")}">${NUTRIENT_ICONS[t] || ""} ${esc(t)}</span>`
+    ).join("")}</div>`
     : `<div class="nutrient-tags"><span class="nutrient-tag-plain">No standout nutrients</span></div>`;
 
   // Collapsible macro breakdown
@@ -750,7 +750,7 @@ function renderHistory(history) {
   const sortedDates = Object.keys(grouped).sort((a, b) => b.localeCompare(a));
 
   container.innerHTML = sortedDates.map(date => {
-    const label   = date === todayStr() ? "Today" : formatDate(date);
+    const label = date === todayStr() ? "Today" : formatDate(date);
     const entries = grouped[date].map(h => `
       <div class="history-entry">
         <span class="history-meal-icon">${MEAL_ICONS[h.meal] || ""}</span>
@@ -833,7 +833,7 @@ function renderGroceryList(store) {
 
 function toggleMealMore() {
   const wrap = document.getElementById("grocery-meal-wrap");
-  const btn  = document.getElementById("btn-meal-show-more");
+  const btn = document.getElementById("btn-meal-show-more");
   if (!wrap || !btn) return;
   const expanding = wrap.classList.contains("collapsed");
   wrap.classList.toggle("collapsed", !expanding);
@@ -850,8 +850,8 @@ function togglePantryGroup() {
 }
 
 function onGrocerySearch(query) {
-  const q           = query.toLowerCase().trim();
-  const wrap        = document.getElementById("grocery-meal-wrap");
+  const q = query.toLowerCase().trim();
+  const wrap = document.getElementById("grocery-meal-wrap");
   const showMoreBtn = document.getElementById("btn-meal-show-more");
 
   // During search reveal all items; on clear restore user's choice
@@ -891,29 +891,29 @@ function formatDate(dateStr) {
 // ─── EVENT BINDING ────────────────────────────────────────────────────────────
 function bindEvents() {
   // ── Static element handlers ─────────────────────────────────────────────────
-  document.querySelector(".btn-info")    .addEventListener("click", openInfo);
+  document.querySelector(".btn-info").addEventListener("click", openInfo);
   document.querySelector(".btn-settings").addEventListener("click", openSettings);
   document.querySelector(".dish-search-pill").addEventListener("click", openDishSearch);
   document.getElementById("btn-meal-breakfast").addEventListener("click", () => onSelectMeal("Breakfast"));
-  document.getElementById("btn-meal-dinner")   .addEventListener("click", () => onSelectMeal("Dinner"));
+  document.getElementById("btn-meal-dinner").addEventListener("click", () => onSelectMeal("Dinner"));
   document.querySelectorAll(".tab-btn[data-tab]").forEach(btn =>
     btn.addEventListener("click", () => switchTab(btn.dataset.tab)));
-  document.getElementById("settings-overlay") .addEventListener("click", closeSettings);
+  document.getElementById("settings-overlay").addEventListener("click", closeSettings);
   document.getElementById("settings-close-btn").addEventListener("click", closeSettings);
   document.getElementById("toggle-genericSides").addEventListener("change", e => onToggleSetting("genericSides", e.target.checked));
   document.getElementById("toggle-nutrientBias").addEventListener("change", e => onToggleSetting("nutrientBias", e.target.checked));
-  document.getElementById("btn-export")  .addEventListener("click", onExport);
-  document.getElementById("file-import") .addEventListener("change", onImportFile);
+  document.getElementById("btn-export").addEventListener("click", onExport);
+  document.getElementById("file-import").addEventListener("change", onImportFile);
   document.getElementById("info-overlay").addEventListener("click", closeInfo);
   document.getElementById("info-close-btn").addEventListener("click", closeInfo);
-  document.getElementById("search-overlay")  .addEventListener("click", closeDishSearch);
+  document.getElementById("search-overlay").addEventListener("click", closeDishSearch);
   document.getElementById("search-close-btn").addEventListener("click", closeDishSearch);
   document.getElementById("dish-search-input").addEventListener("input", e => onDishSearch(e.target.value));
 
   // ── Delegated handlers (dynamic content) ────────────────────────────────────
   document.getElementById("card-wrap").addEventListener("click", e => {
-    if (e.target.closest("[data-action='shuffle']"))    onShuffle();
-    if (e.target.closest("[data-action='cooked']"))     onCooked();
+    if (e.target.closest("[data-action='shuffle']")) onShuffle();
+    if (e.target.closest("[data-action='cooked']")) onCooked();
     const nutBtn = e.target.closest("[data-action='nut-toggle']");
     if (nutBtn) nutBtn.nextElementSibling.classList.toggle("open");
   });
@@ -929,7 +929,7 @@ function bindEvents() {
 
   const grocery = document.getElementById("grocery-section");
   grocery.addEventListener("click", e => {
-    if (e.target.closest("[data-action='show-more']"))    toggleMealMore();
+    if (e.target.closest("[data-action='show-more']")) toggleMealMore();
     if (e.target.closest("[data-action='pantry-toggle']")) togglePantryGroup();
   });
   grocery.addEventListener("change", e => {
