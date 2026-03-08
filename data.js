@@ -68,9 +68,14 @@ const CATEGORY_RULES = {
   "Kozhukattai": ["Chutney", "Sambar"],
   "Naan":        ["SalnaCurry", "EggCurry", "Chutney"],
   "Rice":        ["Papad", "Chutney"],
-  "Noodles":     ["Chutney"],
-  "Bread":       ["Chutney", "EggCurry"],
-  "Other":       ["Chutney"],
+  "Noodles":    ["Chutney"],
+  "Bread":      ["Chutney", "EggCurry"],
+  "Idiyappam":  ["KeralaKurry", "EggCurry", "Chutney", "Sambar"],
+  "Appam":      ["KeralaKurry", "EggCurry", "Chutney"],
+  "Pasta":      ["Chutney"],
+  "Kothu":      ["Chutney"],
+  "Paratha":    ["Chutney", "EggCurry"],
+  "Other":      ["Chutney"],
 };
 
 // ─── DISHES ──────────────────────────────────────────────────────────────────
@@ -402,6 +407,11 @@ const DISHES = [
     nutrition: { cal: 280, protein: 3.0, carbs: 58, fat: 5.0, fiber: 1.0, calcium: 15, iron: 1.0},
     nutrients: [],
   },
+  {
+    name: "Kambu Upma", meals: ["Breakfast", "Dinner"], category: "Upma", weight: "Light",
+    nutrition: { cal: 230, protein: 6.5, carbs: 38, fat: 6.5, fiber: 5.0, calcium: 40, iron: 4.0},
+    nutrients: ["Iron", "Fiber"],
+  },
 
   // ── Semiya ────────────────────────────────────────────────────────────────
   {
@@ -599,6 +609,31 @@ const DISHES = [
     nutrition: { cal: 350, protein: 12.0, carbs: 52, fat: 10.0, fiber: 2.0, calcium: 35, iron: 2.0},
     nutrients: ["Protein"],
   },
+  {
+    name: "Dal Rice", meals: ["Dinner"], category: "Rice", weight: "Light",
+    nutrition: { cal: 300, protein: 10.0, carbs: 50, fat: 5.0, fiber: 4.0, calcium: 35, iron: 2.5},
+    nutrients: ["Protein", "Fiber"],
+  },
+  {
+    name: "Pudina Rice", meals: ["Breakfast", "Dinner"], category: "Rice", weight: "Light",
+    nutrition: { cal: 290, protein: 5.5, carbs: 52, fat: 8.0, fiber: 2.0, calcium: 20, iron: 1.5},
+    nutrients: [],
+  },
+  {
+    name: "Coriander Rice", meals: ["Breakfast", "Dinner"], category: "Rice", weight: "Light",
+    nutrition: { cal: 285, protein: 5.5, carbs: 52, fat: 7.5, fiber: 2.0, calcium: 25, iron: 1.5},
+    nutrients: [],
+  },
+  {
+    name: "Veg Pulao", meals: ["Dinner"], category: "Rice", weight: "Light",
+    nutrition: { cal: 320, protein: 6.0, carbs: 58, fat: 8.0, fiber: 3.0, calcium: 30, iron: 1.5},
+    nutrients: [],
+  },
+  {
+    name: "Methi Rice", meals: ["Dinner"], category: "Rice", weight: "Light",
+    nutrition: { cal: 295, protein: 7.0, carbs: 52, fat: 7.5, fiber: 3.5, calcium: 30, iron: 3.0},
+    nutrients: ["Fiber"],
+  },
 
   // ── Noodles ───────────────────────────────────────────────────────────────
   {
@@ -615,6 +650,141 @@ const DISHES = [
     name: "Egg Noodles", meals: ["Dinner"], category: "Noodles", weight: "Heavy", egg: true,
     nutrition: { cal: 350, protein: 13.0, carbs: 48, fat: 12.0, fiber: 2.0, calcium: 35, iron: 2.5},
     nutrients: ["Protein"],
+  },
+
+  // ── Idiyappam ─────────────────────────────────────────────────────────────
+  {
+    name: "Rice Idiyappam", meals: ["Breakfast", "Dinner"], category: "Idiyappam", weight: "Light",
+    nutrition: { cal: 180, protein: 3.5, carbs: 38, fat: 1.0, fiber: 1.0, calcium: 15, iron: 0.5},
+    nutrients: [],
+  },
+  {
+    name: "Ragi Idiyappam", meals: ["Breakfast", "Dinner"], category: "Idiyappam", weight: "Light",
+    nutrition: { cal: 175, protein: 4.5, carbs: 36, fat: 1.5, fiber: 3.0, calcium: 210, iron: 2.5},
+    nutrients: ["Calcium", "Fiber"],
+  },
+  {
+    name: "Millet Idiyappam", meals: ["Breakfast", "Dinner"], category: "Idiyappam", weight: "Light",
+    nutrition: { cal: 170, protein: 4.0, carbs: 35, fat: 1.0, fiber: 3.5, calcium: 25, iron: 2.5},
+    nutrients: ["Fiber"],
+  },
+  {
+    name: "Wheat Idiyappam", meals: ["Breakfast", "Dinner"], category: "Idiyappam", weight: "Light",
+    nutrition: { cal: 185, protein: 5.5, carbs: 37, fat: 1.5, fiber: 3.5, calcium: 20, iron: 1.5},
+    nutrients: ["Fiber"],
+  },
+  {
+    name: "Horsegram Idiyappam", meals: ["Breakfast", "Dinner"], category: "Idiyappam", weight: "Light",
+    nutrition: { cal: 180, protein: 8.0, carbs: 32, fat: 1.5, fiber: 4.5, calcium: 70, iron: 3.5},
+    nutrients: ["Protein", "Iron", "Fiber"],
+  },
+
+  // ── Appam ──────────────────────────────────────────────────────────────────
+  {
+    name: "Rice Appam", meals: ["Breakfast", "Dinner"], category: "Appam", weight: "Light",
+    nutrition: { cal: 170, protein: 3.5, carbs: 34, fat: 2.5, fiber: 1.0, calcium: 15, iron: 0.5},
+    nutrients: [],
+  },
+  {
+    name: "Wheat Appam", meals: ["Breakfast", "Dinner"], category: "Appam", weight: "Light",
+    nutrition: { cal: 180, protein: 5.5, carbs: 34, fat: 3.0, fiber: 2.5, calcium: 20, iron: 1.5},
+    nutrients: [],
+  },
+  {
+    name: "Ragi Appam", meals: ["Breakfast", "Dinner"], category: "Appam", weight: "Light",
+    nutrition: { cal: 175, protein: 5.0, carbs: 33, fat: 2.5, fiber: 3.5, calcium: 220, iron: 2.5},
+    nutrients: ["Calcium", "Fiber"],
+  },
+  {
+    name: "Oats Appam", meals: ["Breakfast", "Dinner"], category: "Appam", weight: "Light",
+    nutrition: { cal: 165, protein: 5.5, carbs: 30, fat: 3.0, fiber: 4.0, calcium: 25, iron: 2.0},
+    nutrients: ["Fiber"],
+  },
+
+  // ── Pasta ──────────────────────────────────────────────────────────────────
+  {
+    name: "Wheat Pasta", meals: ["Breakfast", "Dinner"], category: "Pasta", weight: "Heavy",
+    nutrition: { cal: 280, protein: 8.0, carbs: 50, fat: 6.0, fiber: 3.0, calcium: 25, iron: 2.0},
+    nutrients: [],
+  },
+  {
+    name: "Ragi Pasta", meals: ["Breakfast", "Dinner"], category: "Pasta", weight: "Heavy",
+    nutrition: { cal: 270, protein: 7.5, carbs: 48, fat: 6.0, fiber: 4.5, calcium: 200, iron: 2.5},
+    nutrients: ["Calcium", "Fiber"],
+  },
+  {
+    name: "Millet Pasta", meals: ["Breakfast", "Dinner"], category: "Pasta", weight: "Heavy",
+    nutrition: { cal: 265, protein: 7.5, carbs: 46, fat: 6.0, fiber: 4.0, calcium: 30, iron: 3.0},
+    nutrients: ["Fiber"],
+  },
+  {
+    name: "Oats Pasta", meals: ["Breakfast", "Dinner"], category: "Pasta", weight: "Heavy",
+    nutrition: { cal: 255, protein: 8.0, carbs: 42, fat: 6.0, fiber: 5.0, calcium: 25, iron: 2.5},
+    nutrients: ["Fiber"],
+  },
+  {
+    name: "Vermicelli Pasta", meals: ["Breakfast", "Dinner"], category: "Pasta", weight: "Heavy",
+    nutrition: { cal: 270, protein: 7.0, carbs: 48, fat: 6.5, fiber: 2.5, calcium: 20, iron: 1.0},
+    nutrients: [],
+  },
+  {
+    name: "Spinach Pasta", meals: ["Dinner"], category: "Pasta", weight: "Heavy",
+    nutrition: { cal: 260, protein: 8.0, carbs: 44, fat: 6.0, fiber: 4.0, calcium: 60, iron: 3.5},
+    nutrients: ["Iron"],
+  },
+  {
+    name: "Egg Pasta", meals: ["Dinner"], category: "Pasta", weight: "Heavy", egg: true,
+    nutrition: { cal: 320, protein: 13.0, carbs: 46, fat: 10.0, fiber: 2.5, calcium: 40, iron: 2.5},
+    nutrients: ["Protein"],
+  },
+
+  // ── Kothu ──────────────────────────────────────────────────────────────────
+  {
+    name: "Kothu Chapati", meals: ["Breakfast", "Dinner"], category: "Kothu", weight: "Heavy",
+    nutrition: { cal: 290, protein: 8.5, carbs: 44, fat: 9.0, fiber: 4.0, calcium: 30, iron: 2.5},
+    nutrients: ["Fiber"],
+  },
+  {
+    name: "Egg Kothu Chapati", meals: ["Breakfast", "Dinner"], category: "Kothu", weight: "Heavy", egg: true,
+    nutrition: { cal: 345, protein: 14.0, carbs: 44, fat: 12.0, fiber: 4.0, calcium: 50, iron: 3.0},
+    nutrients: ["Protein", "Fiber"],
+  },
+  {
+    name: "Veg Kothu Roti", meals: ["Breakfast", "Dinner"], category: "Kothu", weight: "Heavy",
+    nutrition: { cal: 280, protein: 8.0, carbs: 44, fat: 8.0, fiber: 4.5, calcium: 35, iron: 2.5},
+    nutrients: ["Fiber"],
+  },
+  {
+    name: "Ragi Kothu", meals: ["Breakfast", "Dinner"], category: "Kothu", weight: "Heavy",
+    nutrition: { cal: 300, protein: 8.5, carbs: 46, fat: 9.0, fiber: 5.5, calcium: 230, iron: 3.5},
+    nutrients: ["Calcium", "Iron", "Fiber"],
+  },
+
+  // ── Paratha ────────────────────────────────────────────────────────────────
+  {
+    name: "Aloo Paratha", meals: ["Breakfast", "Dinner"], category: "Paratha", weight: "Heavy",
+    nutrition: { cal: 310, protein: 7.0, carbs: 50, fat: 10.0, fiber: 3.5, calcium: 25, iron: 2.0},
+    nutrients: [],
+  },
+  {
+    name: "Methi Paratha", meals: ["Breakfast", "Dinner"], category: "Paratha", weight: "Light",
+    nutrition: { cal: 270, protein: 8.0, carbs: 42, fat: 8.0, fiber: 5.0, calcium: 90, iron: 3.5},
+    nutrients: ["Iron", "Fiber"],
+  },
+  {
+    name: "Gobi Paratha", meals: ["Breakfast", "Dinner"], category: "Paratha", weight: "Heavy",
+    nutrition: { cal: 290, protein: 7.5, carbs: 46, fat: 9.0, fiber: 4.0, calcium: 50, iron: 2.0},
+    nutrients: [],
+  },
+  {
+    name: "Palak Paratha", meals: ["Breakfast", "Dinner"], category: "Paratha", weight: "Light",
+    nutrition: { cal: 265, protein: 7.5, carbs: 42, fat: 7.5, fiber: 4.5, calcium: 80, iron: 3.5},
+    nutrients: ["Iron", "Fiber"],
+  },
+  {
+    name: "Ragi Paratha", meals: ["Breakfast", "Dinner"], category: "Paratha", weight: "Light",
+    nutrition: { cal: 280, protein: 8.0, carbs: 43, fat: 8.5, fiber: 6.0, calcium: 240, iron: 3.5},
+    nutrients: ["Calcium", "Iron", "Fiber"],
   },
 
   // ── Bread ─────────────────────────────────────────────────────────────────
@@ -655,9 +825,14 @@ const CATEGORY_BASE_INGREDIENTS = {
   "Kozhukattai": ["Rice flour", "Coconut (grated)", "Salt"],
   "Naan":        ["Maida", "Baking powder", "Yoghurt", "Butter"],
   "Rice":        ["Cooked rice", "Salt", "Oil"],
-  "Noodles":     ["Noodles", "Oil", "Onion", "Mixed vegetables", "Soy sauce"],
-  "Bread":       ["Bread slices", "Oil / Butter"],
-  "Other":       [],
+  "Noodles":    ["Noodles", "Oil", "Onion", "Mixed vegetables", "Soy sauce"],
+  "Bread":      ["Bread slices", "Oil / Butter"],
+  "Idiyappam":  ["Rice flour (fine)", "Water", "Salt"],
+  "Appam":      ["Raw rice (soaked)", "Coconut milk", "Yeast / Baking soda"],
+  "Pasta":      ["Pasta", "Oil", "Onion", "Tomato", "Mixed vegetables", "Spices"],
+  "Kothu":      ["Chapati / Roti", "Onion", "Tomato", "Oil", "Spices"],
+  "Paratha":    ["Whole wheat flour", "Oil", "Salt"],
+  "Other":      [],
 };
 
 // ─── GROCERY: DISH-SPECIFIC EXTRA INGREDIENTS ────────────────────────────────
@@ -767,6 +942,44 @@ const DISH_EXTRAS = {
   "Bread Poha":             ["Bread slices", "Onion", "Peanuts", "Turmeric"],
   "French Toast":           ["Bread slices", "Eggs", "Milk", "Butter"],
   "Egg Sandwich":           ["Bread slices", "Eggs", "Onion", "Green chilli"],
+  // Idiyappam
+  "Rice Idiyappam":         ["Rice flour (fine)", "Water"],
+  "Ragi Idiyappam":         ["Ragi flour"],
+  "Millet Idiyappam":       ["Millet flour"],
+  "Wheat Idiyappam":        ["Wheat flour"],
+  "Horsegram Idiyappam":    ["Horsegram flour"],
+  // Appam
+  "Rice Appam":             ["Raw rice (soaked)", "Coconut milk", "Yeast / Baking soda"],
+  "Wheat Appam":            ["Wheat flour", "Coconut milk"],
+  "Ragi Appam":             ["Ragi flour", "Coconut milk"],
+  "Oats Appam":             ["Oats", "Coconut milk"],
+  // Pasta
+  "Wheat Pasta":            ["Wheat pasta", "Onion", "Capsicum", "Tomato"],
+  "Ragi Pasta":             ["Ragi pasta", "Onion", "Capsicum", "Tomato"],
+  "Millet Pasta":           ["Millet pasta", "Onion", "Capsicum", "Tomato"],
+  "Oats Pasta":             ["Oat flour pasta / Oat flakes", "Mixed vegetables"],
+  "Vermicelli Pasta":       ["Vermicelli", "Onion", "Capsicum", "Tomato"],
+  "Spinach Pasta":          ["Pasta", "Spinach (Palak)", "Onion", "Garlic"],
+  "Egg Pasta":              ["Pasta", "Eggs", "Onion", "Capsicum"],
+  // Kothu
+  "Kothu Chapati":          ["Leftover chapati", "Onion", "Tomato", "Ginger-garlic paste"],
+  "Egg Kothu Chapati":      ["Leftover chapati", "Eggs", "Onion", "Tomato"],
+  "Veg Kothu Roti":         ["Leftover roti", "Mixed vegetables", "Onion", "Tomato"],
+  "Ragi Kothu":             ["Ragi chapati", "Onion", "Tomato", "Spices"],
+  // Paratha
+  "Aloo Paratha":           ["Potato", "Onion", "Coriander leaves"],
+  "Methi Paratha":          ["Fenugreek leaves (Methi)", "Whole wheat flour"],
+  "Gobi Paratha":           ["Cauliflower (Gobi)", "Whole wheat flour"],
+  "Palak Paratha":          ["Spinach (Palak)", "Whole wheat flour"],
+  "Ragi Paratha":           ["Ragi flour", "Whole wheat flour"],
+  // More rice
+  "Dal Rice":               ["Toor dal / Moong dal", "Ghee", "Cumin"],
+  "Pudina Rice":            ["Mint leaves (Pudina)", "Green chilli", "Ginger"],
+  "Coriander Rice":         ["Coriander leaves (fresh)", "Green chilli", "Coconut"],
+  "Veg Pulao":              ["Basmati rice", "Mixed vegetables", "Whole spices", "Ghee"],
+  "Methi Rice":             ["Fenugreek leaves (Methi)", "Onion", "Spices"],
+  // Kambu
+  "Kambu Upma":             ["Kambu (Pearl millet)", "Onion", "Oil"],
 };
 
 // ─── GROCERY: GENERIC SOUTH INDIAN PANTRY STAPLES ────────────────────────────
@@ -775,6 +988,7 @@ const GENERIC_GROCERIES = [
   "Rice", "Idli rice", "Parboiled rice (Puzhungal arisi)", "Rava (semolina)", "Poha (flattened rice)",
   "Whole wheat flour (Atta)", "Maida", "Ragi flour", "Jowar flour (Sorghum)", "Oats",
   "Broken wheat (Dalia)", "Vermicelli", "Rice flour", "Puttu podi",
+  "Kambu (Pearl millet)", "Wheat pasta", "Ragi pasta", "Millet pasta",
   // Dals & Legumes
   "Toor dal", "Moong dal (split yellow)", "Moong dal (whole green)", "Urad dal", "Chana dal",
   "Masoor dal", "Rajma (kidney beans)", "Kabuli chana (chickpeas)", "Horsegram (Kollu)",
