@@ -248,7 +248,7 @@ header .tagline {
   border-radius: 8px;
   font-size: 0.8rem;
   color: var(--text-light);
-  line-height: 1.5;
+  text-align: center;
 }
 
 .category-badge {
