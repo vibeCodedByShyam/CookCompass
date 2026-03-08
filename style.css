@@ -95,7 +95,7 @@ body {
 header {
   background: var(--green);
   color: var(--white);
-  padding: 20px 64px 20px 64px; /* symmetric — left for date, right for buttons */
+  padding: 20px 64px 20px 20px; /* right padding leaves room for the stacked buttons */
   text-align: center;
   position: relative;
 }
@@ -136,28 +136,6 @@ header .tagline {
   margin-top: 4px;
 }
 
-#date-display {
-  position: absolute;
-  left: 14px;
-  top: 14px;
-  text-align: left;
-  font-size: 0.72rem;
-  opacity: 0.85;
-  line-height: 1.5;
-  white-space: nowrap;
-}
-
-.date-day {
-  display: block;
-  font-weight: 700;
-  font-size: 0.75rem;
-}
-
-.date-num {
-  display: block;
-  font-size: 0.68rem;
-  opacity: 0.85;
-}
 
 /* ─── CONTAINER ────────────────────────────────────────────────────────────── */
 .container {
@@ -1310,11 +1288,16 @@ details[open] .faq-q::after { transform: rotate(90deg); }
 
 .info-footer {
   text-align: center;
-  font-size: 0.68rem;
+  font-size: 0.72rem;
   color: var(--text-light);
   font-style: italic;
+  font-weight: 600;
   margin-top: 20px;
   padding: 14px 0 4px;
   border-top: 1px solid var(--green-soft);
   letter-spacing: 0.2px;
+  background: linear-gradient(90deg, #e65c00, #f9d423, #2E7D32, #1565C0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
