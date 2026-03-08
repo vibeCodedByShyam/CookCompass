@@ -517,15 +517,6 @@ function renderTodayCooked(store) {
 
 // ─── RENDERING ────────────────────────────────────────────────────────────────
 function renderAll(store) {
-  // Date
-  const dateEl = document.getElementById("date-display");
-  if (dateEl) {
-    const now = new Date();
-    const weekday = now.toLocaleDateString("en-IN", { weekday: "long" });
-    const shortDate = now.toLocaleDateString("en-IN", { day: "numeric", month: "short" });
-    dateEl.innerHTML = `<span class="date-day">${esc(weekday)}</span><span class="date-num">${esc(shortDate)}</span>`;
-  }
-
   // Meal selector buttons
   ["Breakfast", "Dinner"].forEach(meal => {
     const btn = document.getElementById(`btn-meal-${meal.toLowerCase()}`);
