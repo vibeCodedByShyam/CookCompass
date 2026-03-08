@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'none'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src 'self' data:; connect-src 'none';">
+  <title>CookCompass – Your daily healthy meal Planner</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" href="icon-androind.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon-iphone.png">
+  <meta name="theme-color" content="#2E7D32">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-title" content="CookCompass">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <header>
+    <h1>CookCompass</h1>
+    <p class="tagline">Your daily healthy meal Planner ❤️</p>
+    <p id="date-display"></p>
+    <button class="btn-settings" aria-label="Preferences">⚙️</button>
+    <button class="btn-info"     aria-label="Help & FAQ">ℹ️</button>
+  </header>
+
+  <!-- ── Page: Today ──────────────────────────────────────────────────────── -->
+  <div class="page active" id="page-today">
+    <div class="container">
+      <button class="dish-search-pill" aria-label="Search dishes">
+        <span class="dish-search-pill-icon">🔍</span>
+        <span class="dish-search-pill-text">Search dishes… e.g. varagu, ragi</span>
+      </button>
+      <div class="meal-selector">
+        <button id="btn-meal-breakfast" class="btn-meal">☀️ Breakfast</button>
+        <button id="btn-meal-dinner"    class="btn-meal">🌙 Dinner</button>
+      </div>
+      <div class="card-wrap" id="card-wrap">
+        <div class="meal-card empty">
+          <div class="empty-icon">🍽️</div>
+          <div class="empty-title">What should I cook today?</div>
+          <div class="empty-sub">Tap ☀️ Breakfast or 🌙 Dinner above to get a suggestion</div>
+        </div>
+      </div>
+      <div id="suggestion-nudge"></div>
+      <div id="today-cooked"></div>
+    </div>
+  </div>
+
+  <!-- ── Page: Nutrients ─────────────────────────────────────────────────── -->
+  <div class="page" id="page-nutrition">
+    <div class="container">
+      <div class="analysis-banner" id="analysis-banner"></div>
+    </div>
+  </div>
+
+  <!-- ── Page: History ──────────────────────────────────────────────────── -->
+  <div class="page" id="page-history">
+    <div class="container">
+      <section class="history-section">
+        <h2>📅 Cooking History</h2>
+        <div id="history-list"></div>
+      </section>
+    </div>
+  </div>
+
+  <!-- ── Page: Grocery ──────────────────────────────────────────────────── -->
+  <div class="page" id="page-grocery">
+    <div class="container">
+      <section id="grocery-section"></section>
+    </div>
+  </div>
+
+  <!-- ── Bottom navigation ─────────────────────────────────────────────── -->
+  <nav class="bottom-nav">
+    <button class="tab-btn active" data-tab="today">
+      <span class="tab-icon">🍽️</span>
+      <span class="tab-label">Today</span>
+    </button>
+    <button class="tab-btn" data-tab="nutrition">
+      <span class="tab-icon">📊</span>
+      <span class="tab-label">Nutrients</span>
+    </button>
+    <button class="tab-btn" data-tab="history">
+      <span class="tab-icon">📅</span>
+      <span class="tab-label">History</span>
+    </button>
+    <button class="tab-btn" data-tab="grocery">
+      <span class="tab-icon">🛒</span>
+      <span class="tab-label">Grocery</span>
+    </button>
+  </nav>
+
+  <!-- ── Settings overlay ──────────────────────────────────────────────── -->
+  <div id="settings-overlay" class="settings-overlay"></div>
+
+  <div id="settings-sheet" class="settings-sheet">
+    <div class="settings-header">
+      <span class="settings-title">Preferences</span>
+      <button class="settings-close" id="settings-close-btn">✕</button>
+    </div>
+    <div class="settings-body">
+
+      <div class="settings-section-label">Suggestions</div>
+
+      <div class="settings-row">
+        <div class="settings-row-text">
+          <div class="settings-row-label">Generic sides</div>
+          <div class="settings-row-desc">Show "Sambar" instead of "Toor dal radish Sambar"</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-genericSides">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="settings-row">
+        <div class="settings-row-text">
+          <div class="settings-row-label">Nutrient-smart picks</div>
+          <div class="settings-row-desc">Suggest dishes that cover your weekly gaps</div>
+        </div>
+        <label class="toggle-switch">
+          <input type="checkbox" id="toggle-nutrientBias">
+          <span class="toggle-slider"></span>
+        </label>
+      </div>
+
+      <div class="settings-divider"></div>
+      <div class="settings-section-label">Data</div>
+
+      <div class="settings-data-row">
+        <button class="btn-data" id="btn-export">⬇ Export backup</button>
+        <label class="btn-data btn-import">
+          ⬆ Import backup
+          <input type="file" accept=".json" id="file-import" style="display:none">
+        </label>
+      </div>
+      <div id="data-status" class="data-status"></div>
+
+    </div>
+  </div>
+
+  <!-- ── Info / FAQ overlay ───────────────────────────────────────────────── -->
+  <div id="info-overlay" class="settings-overlay"></div>
+
+  <div id="info-sheet" class="settings-sheet info-sheet">
+    <div class="settings-header">
+      <span class="settings-title">Help & FAQ</span>
+      <button class="settings-close" id="info-close-btn">✕</button>
+    </div>
+    <div class="info-sheet-body">
+
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary class="faq-q">How does the meal suggestion work?</summary>
+          <p class="faq-a">CookCompass picks a dish you haven't cooked recently, and pairs it with a suitable side. If nutrient-smart picks is on, it leans toward dishes that cover your weekly gaps in protein, iron, calcium, or fiber.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Why does it keep suggesting the same dishes?</summary>
+          <p class="faq-a">It avoids repeating a dish within 7 days. If you have a small cooking history, the pool of "recent" dishes shrinks and suggestions may feel repetitive. Mark more meals as cooked to help it learn your pattern.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What does "Mark as Cooked" do?</summary>
+          <p class="faq-a">It logs the meal into your history. This drives two things — the nutrient tracker updates with what you actually ate, and the suggestion engine avoids repeating that dish for the next 7 days.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Is my data saved anywhere?</summary>
+          <p class="faq-a">All your history and settings are saved on your device only — nothing is sent to any server. The data lives inside your browser, so it will be lost if you: clear your browser/site data, use incognito or private mode, switch to a different browser, or get a new phone. This is exactly why the Export backup option exists — it lets you download your data as a file so you can restore it anytime, or move it to another device.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How do I back up or move my data?</summary>
+          <p class="faq-a">Go to ⚙️ Settings → Export backup. This downloads a JSON file. To restore, use Import backup on any device with the same file.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">What are nutrient-smart picks?</summary>
+          <p class="faq-a">When enabled, the app checks which nutrients (protein, calcium, iron, fiber) you've had less of this week and prioritises dishes that cover those gaps. You can toggle this off in ⚙️ Settings for pure variety-based suggestions.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">Does this work offline?</summary>
+          <p class="faq-a">Yes — once the page is loaded, everything works without an internet connection. Your data is local and the app needs no server to function.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">The nutrition numbers — how accurate are they?</summary>
+          <p class="faq-a">They are approximate values for the main dish only, based on typical home-cooked portions with moderate oil. Side dishes are not included. Use them as a relative guide, not precise medical data.</p>
+        </details>
+        <details class="faq-item">
+          <summary class="faq-q">How does the Grocery list work?</summary>
+          <p class="faq-a">The Grocery tab automatically builds a list of ingredients from your meals cooked in the past 7 days, plus today's suggested meals. The "Everyday Ingredients" section below it shows common South Indian pantry staples. Use the search bar to quickly find a specific item, and tick items off as you shop.</p>
+        </details>
+      </div>
+
+      <div class="info-contact">
+        <div class="info-contact-label">Contact</div>
+        <p class="info-contact-text">Questions, feedback, or something broken?</p>
+        <a class="info-contact-link" href="mailto:writetosbp@gmail.com">writetosbp@gmail.com</a>
+      </div>
+
+      <div class="info-footer">Designed with passion by a Human. Vibe coded with AI</div>
+
+    </div>
+  </div>
+
+  <!-- ── Pending meals toast ───────────────────────────────────────────────── -->
+  <div id="pending-toast" class="pending-toast"></div>
+
+  <!-- ── Dish search overlay ───────────────────────────────────────────────── -->
+  <div id="search-overlay" class="settings-overlay"></div>
+
+  <div id="search-sheet" class="settings-sheet search-sheet">
+    <div class="settings-header">
+      <span class="settings-title">Find a dish</span>
+      <button class="settings-close" id="search-close-btn">✕</button>
+    </div>
+    <div class="search-sheet-body">
+      <input type="search" id="dish-search-input" class="dish-search-input"
+             placeholder="e.g. varagu, ragi, raw banana…"
+             autocomplete="off" autocorrect="off">
+      <div id="dish-search-results" class="dish-search-results">
+        <p class="search-hint">Type at least 2 letters to search all dishes</p>
+      </div>
+    </div>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

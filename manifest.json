@@ -1,0 +1,24 @@
+{
+  "name": "CookCompass",
+  "short_name": "CookCompass",
+  "description": "South Indian meal planner — daily suggestions, nutrient tracking, grocery list.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#2E7D32",
+  "theme_color": "#2E7D32",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "icon-androind.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-iphone.png",
+      "sizes": "180x180",
+      "type": "image/png",
+      "purpose": "any"
+    }
+  ]
+}
